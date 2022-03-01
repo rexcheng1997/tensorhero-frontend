@@ -1,0 +1,57 @@
+[Song]
+{
+  Name = "Test 4"
+  Artist = "Artist 4"
+  Charter = "Charter 4"
+  Album = "Album 4"
+  Year = ", 1994"
+  Offset = 0
+  Resolution = 192
+  Player2 = bass
+  Difficulty = 4
+  PreviewStart = 0
+  PreviewEnd = 0
+  Genre = "Instrumental Rock"
+  MediaType = "cd"
+  MusicStream = "song.ogg"
+}
+[SyncTrack]
+{
+  0 = TS 5
+  0 = B 148963
+  1152 = B 114000
+  1200 = TS 4
+  1536 = B 112000
+  1544 = TS 5
+}
+[Events]
+{
+}
+[ExpertSingle]
+{
+  960 = N 1 0
+  960 = N 3 0
+  960 = N 0 0
+  1008 = N 4 0
+  1008 = N 0 0
+  1056 = N 1 0
+  1056 = N 3 0
+  1056 = N 0 0
+  1104 = N 4 0
+  1104 = N 0 0
+  1152 = N 1 0
+  1152 = N 3 0
+  1200 = S 4 20
+  1200 = S 0 20
+  1248 = N 4 0
+  1248 = N 0 0
+  1296 = N 1 200
+  1296 = N 3 200
+  1296 = N 0 200
+  1544 = N 4 0
+  1544 = N 2 0
+  1592 = N 1 0
+  1592 = N 3 0
+  1592 = N 0 0
+  1640 = N 4 0
+}

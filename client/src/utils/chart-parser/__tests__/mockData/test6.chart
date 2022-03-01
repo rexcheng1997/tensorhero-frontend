@@ -1,0 +1,53 @@
+[Song]
+{
+  Name = "Test 6"
+  Artist = "Artist 6"
+  Charter = "Charter 6"
+  Album = "Album 6"
+  Year = ", 1993"
+  Offset = 0
+  Resolution = 192
+  Player2 = bass
+  Difficulty = 4
+  PreviewStart = 0
+  PreviewEnd = 0
+  Genre = "Instrumental Rock"
+  MediaType = "cd"
+  MusicStream = "song.ogg"
+}
+[SyncTrack]
+{
+  0 = TS 5
+  0 = B 148963
+}
+[Events]
+{
+}
+[UnknownSection]
+{
+  960 = N 1 0
+  960 = N 3 0
+  960 = N 0 0
+  1008 = N 4 0
+  1008 = N 0 0
+  1056 = N 1 0
+  1056 = N 3 0
+  1056 = N 0 0
+  1104 = N 4 0
+  1104 = N 0 0
+  1152 = N 1 0
+  1152 = N 3 0
+  1200 = N 4 20
+  1200 = N 0 20
+  1248 = N 4 0
+  1248 = N 0 0
+  1296 = N 1 200
+  1296 = N 3 200
+  1296 = N 0 200
+  1544 = N 4 0
+  1544 = N 0 0
+  1592 = N 1 0
+  1592 = N 3 0
+  1592 = N 0 0
+  1640 = N 4 0
+}

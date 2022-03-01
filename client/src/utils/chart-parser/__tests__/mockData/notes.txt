@@ -1,0 +1,16 @@
+Chart test file notes:
+
+Test 1
+- only N, no noteduration, no events
+
+Test 2
+- Adding S notes and duration
+
+Test 3
+- Adding S notes, duration, and changing TS
+
+Test 4
+- Adding S notes, duration, changing TS and BPM
+
+Test 5
+- Adding tap, force, open notes, Adding S notes, duration, changing TS and BPM, adding Events
