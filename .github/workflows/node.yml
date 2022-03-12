@@ -1,0 +1,42 @@
+# name of the workflow (i.e. the continuous integration pipeline)
+name: tensorhero-ci
+
+# triggers for the workflow
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+
+# jobs to run
+jobs:
+  # check coding style and run all the tests
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install packages
+        working-directory: ./client
+        run: npm install
+      - name: Run lint
+        working-directory: ./client
+        run: npm run lint
+      - name: Run test
+        working-directory: ./client
+        run: npm run test
+
+  # build source code
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Production build
+        working-directory: ./client
+        run: |
+          npm install
+          npm run build
