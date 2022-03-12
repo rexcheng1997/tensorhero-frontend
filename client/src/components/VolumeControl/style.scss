@@ -1,0 +1,40 @@
+.volume-control {
+  position: relative;
+
+  .volume-icon {
+    margin-right: 0.6rem;
+    cursor: pointer;
+  }
+
+  .volume-control-bar {
+    $volume-control-bar-width: 60px;
+    $volume-control-bar-height: 4px;
+
+    width: $volume-control-bar-width;
+    height: $volume-control-bar-height;
+    position: relative;
+    background-color: var(--th-black);
+    border-radius: $volume-control-bar-height;
+    cursor: pointer;
+
+    .volume-control-indicator {
+      height: $volume-control-bar-height;
+      position: relative;
+      background-color: white;
+      border-radius: $volume-control-bar-height;
+    }
+
+    .volume-control-handle {
+      $control-handle-diameter: 10px;
+
+      width: $control-handle-diameter;
+      height: $control-handle-diameter;
+      position: absolute;
+      top: calc(-1 * #{$control-handle-diameter} / 2 + #{$volume-control-bar-height} / 2);
+      right: calc(-1 * #{$control-handle-diameter} / 2);
+      background-color: white;
+      border-radius: $control-handle-diameter;
+      cursor: pointer;
+    }
+  }
+}

@@ -2,16 +2,20 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: './src/pages/main.tsx',
+    chartVizDemo: './src/pages/chart-viz-demo/index.tsx',
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, '../public/javascripts'),
+    publicPath: '/javascripts/',
   },
   resolve: {
     alias: {
       assets: path.resolve(__dirname, '../public'),
+      components: path.resolve(__dirname, 'src/components'),
+      utils: path.resolve(__dirname, 'src/utils'),
     },
+    modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
   },
   module: {
     rules: [{

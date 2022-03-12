@@ -12,15 +12,15 @@ export interface ChartSongObjectInterface {
   Difficulty: string,
   PreviewStart: string,
   PreviewEnd: string,
-  Genre: string,
+  Genre?: string,
   MediaType: string,
   MusicStream: string,
 };
 export type ChartSongObjectKeys = keyof ChartSongObjectInterface;
 
-export type Tick = Number;
-export type TimeSignature = Number;
-export type BPM = Number;
+export type Tick = number;
+export type TimeSignature = number;
+export type BPM = number;
 
 export enum SyncTrackType {
   // eslint-disable-next-line no-unused-vars

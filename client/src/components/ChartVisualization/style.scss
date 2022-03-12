@@ -1,0 +1,122 @@
+.visualization-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.main-screen-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 3rem;
+  overflow: hidden;
+
+  &:hover .progress-container {
+    transform: translateY(0);
+  }
+}
+
+.overview-wrapper {
+  position: relative;
+  width: 100%;
+
+  &:hover .block-control .block-control-handle {
+    background-color: white;
+  }
+}
+
+.main-screen-wrapper canvas {
+  cursor: pointer !important;
+}
+
+.main-screen-wrapper .progress-container {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  transform: translateY(100%);
+  transition: all ease-out 0.618s;
+}
+
+.main-screen-wrapper .progress {
+  $progress-bar-height: 3px;
+  width: 100%;
+  position: relative;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+
+  &:hover .progress-bar-handle {
+    display: block;
+  }
+
+  .progress-bar-wrapper {
+    width: 100%;
+    height: $progress-bar-height;
+    position: absolute;
+    top: calc(-1 * #{$progress-bar-height});
+    left: 0;
+    cursor: pointer;
+  }
+
+  .progress-bar {
+    width: 0;
+    height: 100%;
+    position: relative;
+    background-color: white;
+  }
+
+  .progress-bar-handle {
+    $control-handle-diameter: 14px;
+    display: none;
+    width: $control-handle-diameter;
+    height: $control-handle-diameter;
+    position: absolute;
+    top: calc(-1 * #{$control-handle-diameter} / 2 + #{$progress-bar-height} / 2);
+    right: calc(-1 * #{$control-handle-diameter} / 2);
+    background-color: white;
+    border-radius: $control-handle-diameter;
+    cursor: pointer;
+  }
+
+  span {
+    display: inline-flex;
+  }
+
+  .player-control-left > * {
+    margin: 0 0.5rem;
+  }
+  .player-control-left svg, .player-control-right svg {
+    cursor: pointer;
+  }
+}
+
+.overview-wrapper .block-control {
+  $handle-width: 3px;
+  $border-width: 0.6px;
+
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: $border-width solid white;
+  z-index: 10;
+  transition: background-color ease-out 0.6s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .block-control-handle {
+    width: $handle-width;
+    height: calc(100% + #{$border-width} * 2);
+    position: absolute;
+    top: calc(-1 * #{$border-width});
+    right: calc(-1 * #{$handle-width} / 2);
+    background-color: transparent;
+    transition: inherit;
+    cursor: col-resize;
+  }
+}
