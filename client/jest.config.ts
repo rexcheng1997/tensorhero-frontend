@@ -141,6 +141,7 @@ export default {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
+    'jest-location-mock',
   ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
