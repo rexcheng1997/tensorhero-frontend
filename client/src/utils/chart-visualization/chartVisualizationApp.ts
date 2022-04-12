@@ -11,6 +11,8 @@ import {
   FRETBOARD,
   NOTE_COLORS,
   MIN_NOTE_RADIUS,
+  CANVAS_BACKGROUND_ALPHA,
+  CANVAS_BACKGROUND_COLOR,
 } from './constants';
 
 interface ConfigurationInterface {
@@ -78,7 +80,8 @@ export default class ChartVisualizationApp {
     this.app = new PIXI.Application({
       width: this.width,
       height: this.height,
-      backgroundAlpha: 0,
+      backgroundColor: CANVAS_BACKGROUND_COLOR,
+      backgroundAlpha: CANVAS_BACKGROUND_ALPHA,
       antialias: true,
       resolution: window.devicePixelRatio || 1,
     });
@@ -417,7 +420,7 @@ export default class ChartVisualizationApp {
     this.fretboardGraphics.endFill();
 
     // inner two vertical lines
-    this.fretboardGraphics.beginFill(COLORS.BLACK);
+    this.fretboardGraphics.beginFill(COLORS.LIGHT_GRAY);
     this.fretboardGraphics.drawRoundedRect(
         this.config.linewidth.normal + this.config.sideGap,
         0,
@@ -435,7 +438,7 @@ export default class ChartVisualizationApp {
     this.fretboardGraphics.endFill();
 
     // five horizontal lines
-    this.fretboardGraphics.beginFill(COLORS.BLACK);
+    this.fretboardGraphics.beginFill(COLORS.WHITE);
     for (let i = 0; i < 5; i++) {
       this.fretboardGraphics.drawRect(
           this.config.linewidth.normal * 2 + this.config.sideGap,
@@ -492,7 +495,7 @@ export default class ChartVisualizationApp {
     if (this.config.showMeasureBars) this.drawMeasureBars();
 
     const radius = Math.max(
-        this.verticalGap - this.config.sideGap,
+        this.verticalGap - this.config.sideGap * 2,
         this.config.minNoteRadius,
     );
     const computePositionY = linear(

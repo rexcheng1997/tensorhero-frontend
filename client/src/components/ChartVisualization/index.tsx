@@ -33,7 +33,7 @@ let audio: Howl;
 export type ChartVisualizationProps = {
   chartObject: ChartObjectInterface,
   audioUrl: string,
-  callbackOnLoaded?: () => void;
+  callbackOnLoaded?: () => void,
 };
 
 /**

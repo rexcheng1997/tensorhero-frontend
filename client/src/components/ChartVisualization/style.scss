@@ -85,6 +85,9 @@
   .player-control-left > * {
     margin: 0 0.5rem;
   }
+  .player-control-left .timestamp {
+    font-size: 18px;
+  }
   .player-control-left svg, .player-control-right svg {
     cursor: pointer;
   }

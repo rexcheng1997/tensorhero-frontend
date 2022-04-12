@@ -5,9 +5,10 @@ import NavItem from './NavItem';
 import { resolveToBase } from 'utils/url';
 
 export const navTabMapping = {
-  'generate CH level': 'home.html',
+  'home': 'home.html',
+  'generate CH level': 'generate.html',
   'charts': 'charts.html',
-  'technical staff': 'about.html',
+  'technical stuff': 'about.html',
   'help': 'help.html',
 };
 
