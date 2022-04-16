@@ -2,12 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,200;1,200&family=Timmana&display=swap');
 
 :root {
-  --th-black: #101010;
+  --th-black: #2f2f2f;
   --th-gray: #a8a8a8;
   --th-light-gray: #dbdbdb;
   --th-orange: #ffb23f;
   --th-purple: #9069ff;
   --th-white: #ffffff;
+  --navbar-height: 70px;
 }
 
 *, *::before, *::after {
@@ -25,6 +26,8 @@ html, body {
 h1 {
   font-family: 'Timmana', sans-serif;
   font-size: 48px;
+  line-height: 1;
+  padding-top: 20px !important;
 }
 h2 {
   font-family: 'Timmana', sans-serif;
@@ -32,18 +35,63 @@ h2 {
 }
 p, span {
   font-family: 'Saira', sans-serif;
-  font-size: 24px;
+  font-size: 18px;
 }
 small {
   font-family: 'Saira', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
 }
 h1, h2, p, span, small {
   margin: 0;
 }
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+em {
+  color: var(--th-orange);
+  font-style: normal;
+  text-decoration: underline;
+}
+
+button {
+  padding: 0;
+  color: var(--th-black);
+  background-color: var(--th-white);
+  border: none;
+  cursor: pointer;
+}
+button.th-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+}
+button.th-btn span {
+  font-family: 'Timmana', sans-serif;
+  font-size: 24px;
+  line-height: 1;
+  padding-top: 8px;
+}
+
+form .input-field {
+  margin-bottom: 1rem;
+}
+form .input-field label {
+  font-family: 'Timmana', sans-serif;
+  font-size: 18px;
+  text-transform: capitalize;
+  line-height: 1;
+  padding-top: 8px;
+}
+form .input-field input {
+  font-family: 'Saira', sans-serif;
+  font-size: 14px;
+  padding: 0.5rem;
+  color: var(--th-black);
+  background-color: var(--th-white);
+  border: none;
+  border-radius: 5px;
 }
 
 .container {
@@ -94,7 +142,7 @@ a {
   width: 100vw;
 }
 .page-height {
-  height: 100vh;
+  height: calc(100vh - var(--navbar-height));
 }
 
 .center {
@@ -143,4 +191,11 @@ a {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.banner-text {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--th-black);
+  border-radius: 10px;
 }

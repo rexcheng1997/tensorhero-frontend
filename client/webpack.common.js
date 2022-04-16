@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
+    landing: './src/pages/landing/index.tsx',
     chartVizDemo: './src/pages/chart-viz-demo/index.tsx',
   },
   output: {
