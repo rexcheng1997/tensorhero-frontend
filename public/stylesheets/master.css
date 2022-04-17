@@ -84,6 +84,9 @@ form .input-field label {
   line-height: 1;
   padding-top: 8px;
 }
+form .input-field .asterisk {
+  margin-left: 0.5rem;
+}
 form .input-field input {
   font-family: 'Saira', sans-serif;
   font-size: 14px;
