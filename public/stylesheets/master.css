@@ -44,6 +44,9 @@ small {
 h1, h2, p, span, small {
   margin: 0;
 }
+h1.text-center, h2.text-center {
+  text-align: center;
+}
 
 a {
   color: inherit;
@@ -67,7 +70,15 @@ button.th-btn {
   padding: 0.5rem 1.5rem;
   border-radius: 10px;
 }
+button.th-btn.th-btn-no {
+  color: var(--th-white);
+  background-color: transparent;
+}
+button.th-btn svg {
+  margin-right: 0.6rem;
+}
 button.th-btn span {
+  color: inherit;
   font-family: 'Timmana', sans-serif;
   font-size: 24px;
   line-height: 1;
@@ -145,7 +156,7 @@ form .input-field input {
   width: 100vw;
 }
 .page-height {
-  height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 .center {

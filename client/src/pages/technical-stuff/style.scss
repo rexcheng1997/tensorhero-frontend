@@ -1,0 +1,53 @@
+.home-background {
+  margin-top: 2rem;
+  padding: 5rem 2rem;
+  border-radius: 30px;
+  background-image: url('images/pattern.purple.png');
+  background-repeat: repeat;
+  background-position: top left;
+  background-size: cover;
+}
+
+.content-wrapper {
+  width: 100%;
+  z-index: 1;
+  
+  h1 {
+    margin-bottom: 2rem;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-wrapper {
+    width: 60%;
+  }
+}
+
+section {
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+
+  h1 {
+    margin-bottom: 3rem;
+    transform-style: preserve-3d;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 200px;
+      height: 24px;
+      position: absolute;
+      bottom: 8px;
+      left: 20px;
+      background-image: url('images/pattern.purple.png');
+      background-position: top left;
+      background-size: auto;
+      transform: translateZ(-1px);
+    }
+  }
+  
+  p {
+    margin-bottom: 2rem;
+  }
+}
