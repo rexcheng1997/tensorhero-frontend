@@ -29,19 +29,20 @@ section {
   margin-bottom: 6rem;
 
   h1 {
-    margin-bottom: 3rem;
+    display: inline-block;
+    margin-bottom: 2rem;
     transform-style: preserve-3d;
 
     &::after {
       content: '';
       display: block;
-      width: 200px;
+      width: 60%;
       height: 24px;
       position: absolute;
       bottom: 8px;
-      left: 20px;
+      left: 50%;
       background-image: url('images/pattern.purple.png');
-      background-position: top left;
+      background-position: top right;
       background-size: auto;
       transform: translateZ(-1px);
     }
@@ -49,5 +50,78 @@ section {
   
   p {
     margin-bottom: 2rem;
+  }
+
+  .step-by-step-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 3rem;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 10px;
+      background-color: var(--th-white);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 220px auto;
+      margin-bottom: 3rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        transform-style: preserve-3d;
+
+        &::after {
+          content: '';
+          display: block;
+          width: 111px;
+          height: 24px;
+          position: absolute;
+          bottom: 8px;
+          left: 20px;
+          background-image: url('images/pattern.purple.png');
+          background-position: top left;
+          background-size: auto;
+          transform: translateZ(-1px);
+        }
+      }
+
+      .step-title {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .external-link {
+    span {
+      text-transform: capitalize;
+    }
+
+    a {
+      text-transform: none;
+      text-decoration: underline;
+    }
+
+    .highlight {
+      font-family: 'Timmana', sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      padding-top: 7px;
+      color: var(--th-orange);
+      margin-right: 2rem;
+      text-transform: none;
+    }
   }
 }
