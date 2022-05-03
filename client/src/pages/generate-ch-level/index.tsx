@@ -6,12 +6,12 @@ import _ from 'lodash';
 import Navbar from 'components/Navbar';
 import Upload, { SongInfo } from './Upload';
 import ChartView, { ChartInfo } from './ChartView';
-import parseChartFile, { ChartObjectInterface } from 'utils/chart-parser';
+import { ChartObjectInterface } from 'utils/chart-parser';
 import ProgressReport from './ProgressReport';
 
 const GenerateCHLevelPage: FC = () => {
   const [chartInfo, setChartInfo] = useState<ChartInfo>();
-  const [chartObject, setChartObject] = useState<ChartObjectInterface>();
+  const [chartObject] = useState<ChartObjectInterface>();
   const [audioUrl, setAudioUrl] = useState<string>('');
 
   const uploadEventHandler = (formData: FormData) => {

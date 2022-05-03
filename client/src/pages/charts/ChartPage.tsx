@@ -16,7 +16,7 @@ type ChartPageProps = {
 }
 
 const ChartPage: FC<ChartPageProps> = ({
-  data, onGoBack: goBackEventHandler,
+  data, onGoBack: clearSelectedChart,
 }) => {
   const [chartObject, setChartObject] = useState<ChartObjectInterface>();
 
@@ -31,7 +31,7 @@ const ChartPage: FC<ChartPageProps> = ({
   return (
     <div className='container' style={{ marginTop: '2rem' }}>
 
-      <h2 className='go-back' onClick={() => goBackEventHandler()}>
+      <h2 className='go-back' onClick={clearSelectedChart}>
         {'< Back'}
       </h2>
 
