@@ -85,6 +85,7 @@ export default class ChartVisualizationApp {
       antialias: true,
       resolution: window.devicePixelRatio || 1,
     });
+    this.app.renderer.resize(this.width, this.height);
     this.sprites = loadedSprites;
     this.fretboardGraphics = new PIXI.Graphics();
     this.notesGraphics = new PIXI.Graphics();

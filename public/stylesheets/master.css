@@ -8,6 +8,10 @@
   --th-purple: #9069ff;
   --th-light-purple: #ae92ff;
   --th-white: #ffffff;
+  --th-green: #5de247;
+  --th-yellow: #ffef63;
+  --th-orange-fill: #ff9900;
+  --th-red: #ff4848;
   --navbar-height: 70px;
 }
 
@@ -33,6 +37,10 @@ h2 {
   font-family: 'Timmana', sans-serif;
   font-size: 30px;
 }
+h3 {
+  font-family: 'Timmana', sans-serif;
+  font-size: 24px;
+}
 p, span {
   font-family: 'Saira', sans-serif;
   font-size: 18px;
@@ -43,10 +51,10 @@ small {
   font-size: 14px;
   font-weight: 200;
 }
-h1, h2, p, span, small {
+h1, h2, h3, p, span, small {
   margin: 0;
 }
-h1.text-center, h2.text-center {
+h1.text-center, h2.text-center, h3.text-center {
   text-align: center;
 }
 
@@ -113,6 +121,7 @@ form .input-field .asterisk {
 form .input-field input {
   font-family: 'Saira', sans-serif;
   font-size: 14px;
+  font-weight: 200;
   padding: 0.5rem;
   color: var(--th-black);
   background-color: var(--th-white);
@@ -224,4 +233,28 @@ form .input-field input {
   padding: 1rem 2rem;
   background-color: var(--th-black);
   border-radius: 10px;
+}
+
+.difficulty-levels {
+  margin-bottom: 1rem;
+}
+.difficulty-levels .th-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 5px;
+}
+.difficulty-levels .th-tab.active {
+  color: var(--th-black);
+  background-color: var(--th-white);
+}
+.difficulty-levels .th-tab:hover {
+  box-shadow: none;
+}
+.difficulty-levels .th-tab:disabled {
+  color: var(--th-light-gray);
+  cursor: not-allowed;
 }

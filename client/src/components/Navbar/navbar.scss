@@ -18,9 +18,17 @@ nav {
 
   .nav-tab {
     font-size: 20px;
-
+    transition: color ease 0.3s;
+    
+    &:hover, a:hover {
+      color: var(--th-light-purple);
+    }
     &.active {
       color: var(--th-orange);
+
+      a:hover {
+        color: inherit;
+      }
     }
   }
 }

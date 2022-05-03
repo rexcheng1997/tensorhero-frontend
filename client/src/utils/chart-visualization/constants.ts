@@ -19,7 +19,7 @@ export const NOTE_COLORS = {
 };
 
 export const CANVAS_BACKGROUND_COLOR = 0x0;
-export const CANVAS_BACKGROUND_ALPHA = 0.2;
+export const CANVAS_BACKGROUND_ALPHA = 0.4;
 
 export const FRETBOARD = {
   LINEWIDTH_SLIM: 0.5,

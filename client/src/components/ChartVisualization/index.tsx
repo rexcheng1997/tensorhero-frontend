@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { Loader } from 'pixi.js';
 import { Howl } from 'howler';
 import { CreateEventHandlerFactory } from 'components/types';
 import AspectRatioContainer from 'components/AspectRatioContainer';
@@ -23,9 +24,9 @@ import FullscreenIcon from 'assets/svg/fullscreen.svg';
 import FullscreenExitIcon from 'assets/svg/fullscreen.exit.svg';
 
 const sprites = {};
-const loader = createNoteSpriteLoader(sprites);
 const INITIAL_VOLUME = 0.8;
 const MIN_BLOCK_CONTROL_PERCENTAGE = 0.005;
+let loader: Loader;
 let animationApp: ChartVisualizationApp;
 let overviewApp: ChartVisualizationApp;
 let audio: Howl;
@@ -215,6 +216,7 @@ export default function ChartVisualization({
   };
 
   useEffect(() => {
+    loader = createNoteSpriteLoader(sprites);
     audio = new Howl({
       src: [audioUrl],
       autoplay: false,
@@ -280,6 +282,7 @@ export default function ChartVisualization({
       animationApp?.destroy();
       overviewApp?.destroy();
       audio?.unload();
+      loader.destroy();
       window.removeEventListener('resize', resizeEventHandler);
     };
   }, []);

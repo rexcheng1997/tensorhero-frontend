@@ -9,7 +9,6 @@ export const navTabMapping = {
   'generate CH level': 'generate.html',
   'charts': 'charts.html',
   'technical stuff': 'about.html',
-  'help': 'help.html',
 };
 
 export type NavbarProps = {

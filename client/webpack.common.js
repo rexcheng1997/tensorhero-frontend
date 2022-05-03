@@ -3,7 +3,9 @@ const path = require('path');
 module.exports = {
   entry: {
     landing: './src/pages/landing/index.tsx',
+    generateCHLevel: './src/pages/generate-ch-level/index.tsx',
     technicalStuff: './src/pages/technical-stuff/index.tsx',
+    charts: './src/pages/charts/index.tsx',
     chartVizDemo: './src/pages/chart-viz-demo/index.tsx',
   },
   output: {

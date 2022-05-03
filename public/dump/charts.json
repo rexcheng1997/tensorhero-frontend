@@ -1,0 +1,75 @@
+{
+  "charts": [{
+    "id": 0,
+    "title": "Ouray",
+    "artist": "Andy McKee",
+    "charter": "Angevil",
+    "genre": "acoustic",
+    "cover": "examples/Andy McKee - Ouray/album.png",
+    "audio": "examples/Andy McKee - Ouray/song.ogg",
+    "chart": {
+      "expert": "examples/Andy McKee - Ouray/notes.chart"
+    },
+    "createdAt": "2022-05-01T19:42:09.674Z",
+    "duration": 139,
+    "likes": 7823,
+    "plays": 9878,
+    "downloads": 5002,
+    "shares": 2430,
+    "fullCombo": true
+  }, {
+    "id": 1,
+    "title": "Funk Emergency",
+    "artist": "Marc Rebillet",
+    "charter": "Tensor Hero",
+    "genre": "electronic",
+    "cover": "examples/Tensor Hero - Funk Emergency/album.png",
+    "audio": "examples/Tensor Hero - Funk Emergency/song.ogg",
+    "chart": {
+      "expert": "examples/Tensor Hero - Funk Emergency/notes.chart"
+    },
+    "createdAt": "2022-05-02T19:32:07.192Z",
+    "duration": 174,
+    "likes": 1202,
+    "plays": 2310,
+    "downloads": 890,
+    "shares": 768,
+    "fullCombo": false
+  }, {
+    "id": 2,
+    "title": "Ouray",
+    "artist": "Andy McKee",
+    "charter": "Tensor Hero",
+    "genre": "electronic",
+    "cover": "examples/Tensor Hero - Ouray/album.png",
+    "audio": "examples/Tensor Hero - Ouray/song.ogg",
+    "chart": {
+      "expert": "examples/Tensor Hero - Ouray/notes.chart"
+    },
+    "createdAt": "2022-05-02T19:36:43.442Z",
+    "duration": 139,
+    "likes": 1087,
+    "plays": 1100,
+    "downloads": 451,
+    "shares": 322,
+    "fullCombo": false
+  }, {
+    "id": 3,
+    "title": "Splash",
+    "artist": "CHON",
+    "charter": "Tensor Hero",
+    "genre": "electronic",
+    "cover": "examples/Tensor Hero - Splash/album.png",
+    "audio": "examples/Tensor Hero - Splash/song.ogg",
+    "chart": {
+      "expert": "examples/Tensor Hero - Splash/notes.chart"
+    },
+    "createdAt": "2022-05-03T19:39:28.165Z",
+    "duration": 148,
+    "likes": 889,
+    "plays": 998,
+    "downloads": 102,
+    "shares": 78,
+    "fullCombo": false
+  }]
+}

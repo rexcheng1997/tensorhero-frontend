@@ -1,0 +1,150 @@
+header {
+  margin-bottom: 4rem;
+}
+
+.home-background {
+  margin-top: 2rem;
+  padding: 3rem 2rem;
+  border-radius: 30px;
+  background-image: url('images/pattern.purple.png');
+  background-repeat: repeat;
+  background-position: top left;
+  background-size: cover;
+}
+
+header form .input-field {
+  $input-padding: 1rem;
+  $search-icon-size: 46px;
+  position: relative;
+  margin-bottom: 0;
+
+  input {
+    width: 80vw;
+    padding-left: $input-padding;
+    padding-right: calc(#{$input-padding} * 2 + #{$search-icon-size});
+    color: var(--th-white);
+    background-color: var(--th-black);
+    font-size: 30px;
+
+    &::placeholder {
+      color: inherit;
+      font-family: 'Saira', sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: $input-padding;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1024px) {
+  header form .input-field input {
+    width: 60vw;
+  }
+}
+
+.go-back {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.chart-page-main {
+  $dark-background-color: rgba(144, 105, 255, 0.6);
+  $light-background-color: rgba(144, 105, 255, 0.2);
+  flex-grow: 1;
+
+  & > * {
+    margin-bottom: 2rem;
+  }
+
+  .purple-container {
+    padding: 1rem 2rem;
+    background-color: $dark-background-color;
+    border-radius: 5px;
+  }
+
+  .tag-title {
+    margin-right: 2rem;
+    line-height: 1;
+    padding-top: 6px;
+  }
+
+  .tag {
+    margin-bottom: 0;
+  }
+
+  .details {
+    padding: 0 2rem;
+
+    .detail-title {
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+  
+      span {
+        margin-left: 1rem;
+        font-weight: 400;
+      }
+    }
+  
+    .detail-text {
+      padding-left: calc(30px + 1rem);
+
+      & > * {
+        margin-bottom: 1rem;
+      }
+      & > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .visualization-container {
+    background-color: $light-background-color;
+    border-radius: 5px;
+
+    .difficulty-levels {
+      margin-bottom: 0;
+    }
+
+    .visualization-wrapper {
+      padding: 2rem;
+    }
+  }
+}
+
+.related-charts {
+  width: 220px;
+
+  .title {
+    display: inline-block;
+    position: relative;
+    transform-style: preserve-3d;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 111px;
+      height: 24px;
+      position: absolute;
+      bottom: 6px;
+      right: -20px;
+      background-image: url('images/pattern.purple.png');
+      background-position: top left;
+      background-size: auto;
+      transform: translateZ(-1px);
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .related-charts {
+    margin-left: 2rem;
+  }
+}
