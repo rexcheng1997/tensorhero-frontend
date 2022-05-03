@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "title": "Funk Emergency",
+  "artist": "Marc Rebillet",
+  "charter": "Tensor Hero",
+  "genre": "electronic",
+  "cover": "examples/Tensor Hero - Funk Emergency/album.png",
+  "audio": "examples/Tensor Hero - Funk Emergency/song.ogg",
+  "chart": {
+    "expert": "examples/Tensor Hero - Funk Emergency/notes.chart"
+  },
+  "createdAt": "2022-05-02T19:32:07.192Z",
+  "duration": 174,
+  "likes": 1202,
+  "plays": 2310,
+  "downloads": 890,
+  "shares": 768,
+  "fullCombo": false
+}

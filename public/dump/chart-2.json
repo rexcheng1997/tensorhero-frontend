@@ -1,0 +1,19 @@
+{
+  "id": 2,
+  "title": "Ouray",
+  "artist": "Andy McKee",
+  "charter": "Tensor Hero",
+  "genre": "electronic",
+  "cover": "examples/Tensor Hero - Ouray/album.png",
+  "audio": "examples/Tensor Hero - Ouray/song.ogg",
+  "chart": {
+    "expert": "examples/Tensor Hero - Ouray/notes.chart"
+  },
+  "createdAt": "2022-05-02T19:36:43.442Z",
+  "duration": 139,
+  "likes": 1087,
+  "plays": 1100,
+  "downloads": 451,
+  "shares": 322,
+  "fullCombo": false
+}

@@ -1,0 +1,19 @@
+{
+  "id": 3,
+  "title": "Splash",
+  "artist": "CHON",
+  "charter": "Tensor Hero",
+  "genre": "electronic",
+  "cover": "examples/Tensor Hero - Splash/album.png",
+  "audio": "examples/Tensor Hero - Splash/song.ogg",
+  "chart": {
+    "expert": "examples/Tensor Hero - Splash/notes.chart"
+  },
+  "createdAt": "2022-05-03T19:39:28.165Z",
+  "duration": 148,
+  "likes": 889,
+  "plays": 998,
+  "downloads": 102,
+  "shares": 78,
+  "fullCombo": false
+}
