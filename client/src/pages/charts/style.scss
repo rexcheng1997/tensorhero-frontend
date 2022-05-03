@@ -106,6 +106,10 @@ header form .input-field {
       & > *:last-child {
         margin-bottom: 0;
       }
+
+      &.difficulty-level span {
+        text-transform: capitalize;
+      }
     }
   }
 

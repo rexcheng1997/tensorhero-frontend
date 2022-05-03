@@ -32,7 +32,7 @@ const ChartsPage: FC = () => {
 
   useEffect(() => {
     if (_.has(queryParams, 'chartId')) {
-      const chartId = _.get(queryParams, 'chartId');
+      const chartId = _.get(queryParams, 'chartId') as string;
       fetch(`dump/chart-${chartId}.json`).then(
           (response) => response.json(),
       ).then((chart: ChartDataObject) => {
@@ -43,13 +43,9 @@ const ChartsPage: FC = () => {
 
   return (<>
     <Navbar base='.'/>
-    {
-      renderListing || _.isNil(selectedChart) ? (
-        <ChartListing onSelect={updateSelectedChart}/>
-      ) : (
-        <ChartPage data={selectedChart} onGoBack={clearSelectedChart}/>
-      )
-    }
+    {renderListing && <ChartListing onSelect={updateSelectedChart}/>}
+    {!_.isNil(selectedChart) && <ChartPage
+      data={selectedChart} onGoBack={clearSelectedChart}/>}
   </>);
 };
 

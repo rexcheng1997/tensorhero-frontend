@@ -65,26 +65,12 @@ const ChartPage: FC<ChartPageProps> = ({
                 <span>Difficulty</span>
               </div>
               <div className='detail-text difficulty-level flex-col'>
-                {_.has(data, 'chart.easy') &&
-                <div className='flex-row align-center'>
-                  <span className='level easy'/>
-                  <span>Easy</span>
-                </div>}
-                {_.has(data, 'chart.medium') &&
-                <div className='flex-row align-center'>
-                  <span className='level medium'/>
-                  <span>Medium</span>
-                </div>}
-                {_.has(data, 'chart.hard') &&
-                <div className='flex-row align-center'>
-                  <span className='level hard'/>
-                  <span>Hard</span>
-                </div>}
-                {_.has(data, 'chart.expert') &&
-                <div className='flex-row align-center'>
-                  <span className='level expert'/>
-                  <span>Expert</span>
-                </div>}
+                {Object.keys(data.chart).map((difficulty) => (
+                  <div key={difficulty} className='flex-row align-center'>
+                    <span className={`level ${difficulty}`}/>
+                    <span>{difficulty}</span>
+                  </div>
+                ))}
               </div>
             </div>
             <div className='column flex-col'>

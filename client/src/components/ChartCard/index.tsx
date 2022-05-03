@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import _ from 'lodash';
 import { formatTimestamp } from 'utils/chart-visualization';
 import { formatBigNumber } from 'utils/formatting';
 import DurationIcon from 'assets/svg/duration.svg';
@@ -120,10 +119,9 @@ export default function ChartCard({
           <div className='difficulty-level flex-row align-center'>
             <DifficultyLevelIcon/>
             <div className='flex-row align-center'>
-              {_.has(data, 'chart.easy') && <span className='level easy'/>}
-              {_.has(data, 'chart.medium') && <span className='level medium'/>}
-              {_.has(data, 'chart.hard') && <span className='level hard'/>}
-              {_.has(data, 'chart.expert') && <span className='level expert'/>}
+              {Object.keys(data.chart).map((difficulty) => (
+                <span key={difficulty} className={`level ${difficulty}`}/>
+              ))}
             </div>
           </div>
           <div className='speed flex-row align-center'>
