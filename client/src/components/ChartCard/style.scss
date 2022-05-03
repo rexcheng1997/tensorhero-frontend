@@ -1,0 +1,171 @@
+.chart-card {
+  $chart-card-background-color: rgba(144, 105, 255, 0.19);
+
+  width: 600px;
+  position: relative;
+  margin: 0 auto 2rem auto;
+  background-color: $chart-card-background-color;
+  border-radius: 5px;
+  overflow: hidden;
+
+  &.fill {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+
+  svg.active * {
+    fill: var(--th-red) !important;
+  }
+
+  .chart-card-actions {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+
+    svg {
+      cursor: pointer;
+
+      * {
+        fill: var(--th-white);
+      }
+    }
+  }
+
+  .chart-card-inner {
+    position: relative;
+    padding: 1rem 2rem;
+    margin-right: calc(1rem * 2 + 24px);
+    background-color: $chart-card-background-color;
+    border-radius: 5px;
+    box-shadow: 2px 0 2px rgba(0, 0, 0, 0.25);
+
+    & > * {
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    .cover {
+      width: 45%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 5px 0 0 5px;
+      opacity: 0.6;
+      background-size: cover;
+      background-position: center;
+      clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+      filter: none;
+
+      &.fill {
+        width: 100%;
+        border-radius: 5px;
+        clip-path: none;
+      }
+    }
+
+    .left {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .right {
+      margin-left: 1rem;
+
+      span {
+        margin-left: 1rem;
+      }
+    }
+
+    h2 {
+      width: 60%;
+      text-overflow: ellipsis;
+
+      &.artist {
+        color: #ffd494;
+        font-size: 18px;
+      }
+    }
+
+    .metadata {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+
+      span {
+        margin-right: 1rem;
+      }
+    }
+
+    .stats {
+      & > * {
+        margin-right: 2rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      span {
+        margin-left: 0.5rem;
+      }
+
+      svg * {
+        fill: white;
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .chart-card {
+    margin: 0 1rem 2rem 1rem;
+
+    &.fill {
+      margin: 0;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.tags {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tag {
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #63a1ff;
+  border-radius: 2px;
+  font-family: 'Timmana', sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  padding-top: 7px;
+}
+
+.difficulty-level .level {
+  width: 8px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.easy {
+    background-color: var(--th-green);
+  }
+  &.medium {
+    background-color: var(--th-yellow);
+  }
+  &.hard {
+    background-color: var(--th-orange-fill);
+  }
+  &.expert {
+    background-color: var(--th-red);
+  }
+}
