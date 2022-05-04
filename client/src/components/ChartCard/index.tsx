@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import { saveAs } from 'file-saver';
+import JSZip from 'jszip';
 import { formatTimestamp } from 'utils/chart-visualization';
 import { formatBigNumber } from 'utils/formatting';
 import DurationIcon from 'assets/svg/duration.svg';
@@ -56,6 +58,43 @@ export default function ChartCard({
     event.currentTarget.classList.toggle('active');
     // eslint-disable-next-line max-len
     favoriteIconParentRef.current?.querySelector('svg')?.classList.toggle('active');
+  };
+
+  const downloadEventHandler = (event: React.MouseEvent<SVGElement>) => {
+    event.stopPropagation();
+    const imageExtension = data.cover.split('.').pop() || 'png';
+    const audioExtension = data.audio.split('.').pop() || 'ogg';
+    const files: Record<string, string> = {
+      [`album.${imageExtension}`]: data.cover,
+      'notes.chart': data.chart.expert!,
+      [`song.${audioExtension}`]: data.audio,
+    };
+
+    Promise.all<Promise<[string, Blob]>[]>(
+        Object.entries(files).map(
+            ([filename, url]) => fetch(url).then(
+                (response) => response.blob(),
+            ).then(
+                (blob) => Promise.resolve([filename, blob]),
+            ),
+        ),
+    ).then((blobFiles) => {
+      const zip = new JSZip();
+      const folder = zip.folder(`${data.artist} - ${data.title}`);
+
+      if (folder === null) {
+        return Promise.reject<Error>(new Error('cannot create zip folder'));
+      }
+
+      blobFiles.forEach(([filename, blob]) => {
+        folder.file(filename, blob);
+      });
+
+      zip.generateAsync({ type: 'blob' }).then((content) => {
+        const timestamp = new Date().getTime();
+        saveAs(content, `${data.artist}-${data.title}-${timestamp}.zip`);
+      });
+    });
   };
 
   return (
@@ -139,7 +178,8 @@ export default function ChartCard({
         <FavoriteIcon onClick={favoriteClickEventHandler}/>
         <TwitchIcon/>
         <ShareIcon/>
-        <DownloadIcon width='20' height='18' viewBox='0 0 24 22'/>
+        <DownloadIcon width='20' height='18' viewBox='0 0 24 22'
+          onClick={downloadEventHandler}/>
       </div>
 
     </div>
