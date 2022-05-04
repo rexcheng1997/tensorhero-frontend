@@ -39,8 +39,14 @@ header form .input-field {
     position: absolute;
     top: 50%;
     right: $input-padding;
+    background-color: transparent;
     transform: translateY(-50%);
+    transition: none;
     cursor: pointer;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
 }
 
