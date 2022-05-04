@@ -47,6 +47,7 @@ export default function ChartVisualization({
   chartObject, audioUrl, callbackOnLoaded,
 }: ChartVisualizationProps): JSX.Element {
   const loaded = useRef<boolean>(false);
+  const rootContainerRef = useRef<HTMLDivElement>(null);
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const overviewContainerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -133,6 +134,9 @@ export default function ChartVisualization({
   const fullscreenEventHandler = (event: React.MouseEvent) => {
     event.stopPropagation();
     setFullscreen(!fullscreen);
+    rootContainerRef.current!.classList.toggle('full-screen');
+    animationApp.resize(animationContainerRef.current!);
+    overviewApp.resize(overviewContainerRef.current!);
   };
 
   const updateTimestamp = () => {
@@ -308,7 +312,7 @@ export default function ChartVisualization({
   }, [pixelsPerTick]);
 
   return (
-    <div data-testid='chart-viz-wrapper'
+    <div data-testid='chart-viz-wrapper' ref={rootContainerRef}
       className='flex-col align-end justify-start visualization-wrapper'>
       <AspectRatioContainer
         ratio={3}
@@ -346,7 +350,8 @@ export default function ChartVisualization({
             </div>
 
             <div className='player-control-right flex-row align-center'>
-              <span onClick={fullscreenEventHandler}>
+              <span data-testid='full-screen-icon'
+                onClick={fullscreenEventHandler}>
                 {fullscreen ? <FullscreenExitIcon/> : <FullscreenIcon/>}
               </span>
             </div>

@@ -116,6 +116,21 @@ describe('<ChartVisualization />', () => {
     expect(overviewApp.resize).toHaveBeenCalledWith(overviewContainer);
   });
 
+  test('should enter/exit full screen mode when clicking on the full screen icon', async () => {
+    const { findByTestId } = renderChartVisualization();
+    const container = await findByTestId('chart-viz-wrapper');
+    const fullscreenIcon = await findByTestId('full-screen-icon');
+    await waitForOnMountedHooks();
+
+    expect(container).not.toHaveClass('full-screen');
+
+    fireEvent.click(fullscreenIcon);
+    expect(container).toHaveClass('full-screen');
+
+    fireEvent.click(fullscreenIcon);
+    expect(container).not.toHaveClass('full-screen');
+  });
+
   test('should play/pause the animation and the audio on clicking the main screen', async () => {
     const { findByTestId } = renderChartVisualization();
     const container = await findByTestId('chart-viz-wrapper');

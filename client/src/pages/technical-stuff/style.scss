@@ -103,6 +103,10 @@ section {
         text-transform: uppercase;
       }
     }
+
+    .graphics {
+      width: 100%;
+    }
   }
 
   .external-link {
@@ -128,8 +132,16 @@ section {
 }
 
 @media (min-width: 768px) {
-  section .step-by-step-content-wrapper .step {
-    display: grid;
-    grid-template-columns: 220px auto;
+  section {
+    .step-by-step-content-wrapper {
+      .step {
+        display: grid;
+        grid-template-columns: 220px auto;
+      }
+
+      .graphics {
+        width: 50%;
+      }
+    }
   }
 }

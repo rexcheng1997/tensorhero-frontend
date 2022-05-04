@@ -1,6 +1,17 @@
 .visualization-wrapper {
   position: relative;
   width: 100%;
+
+  &.full-screen {
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: space-around;
+    background-color: var(--th-black);
+    z-index: 2000;
+  }
 }
 
 .main-screen-wrapper {
