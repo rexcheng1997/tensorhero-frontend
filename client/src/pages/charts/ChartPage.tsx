@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import _ from 'lodash';
-import { formatTimestamp } from 'utils/chart-visualization';
+import { formatTimestamp } from 'utils/formatting';
 import Button from 'components/Button';
 import ChartCard, { ChartDataObject } from 'components/ChartCard';
 import ChartVisualization from 'components/ChartVisualization';

@@ -14,8 +14,8 @@ import { ChartObjectInterface } from 'utils/chart-parser';
 import ChartVisualizationApp, {
   clipBetween,
   createNoteSpriteLoader,
-  formatTimestamp,
 } from 'utils/chart-visualization';
+import { formatTimestamp } from 'utils/formatting';
 import { DEFAULT_PIXELS_PER_TICK } from 'utils/chart-visualization/constants';
 
 import PlayIcon from 'assets/svg/play.svg';

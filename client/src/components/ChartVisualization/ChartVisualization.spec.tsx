@@ -4,7 +4,8 @@ import ChartVisualization, {
   ChartVisualizationProps,
   animationApp, overviewApp, audio,
 } from '.';
-import ChartVisualizationApp, { formatTimestamp } from 'utils/chart-visualization';
+import ChartVisualizationApp from 'utils/chart-visualization';
+import { formatTimestamp } from 'utils/formatting';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {

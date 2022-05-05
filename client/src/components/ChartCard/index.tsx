@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { formatTimestamp } from 'utils/chart-visualization';
-import { formatBigNumber } from 'utils/formatting';
+import { formatTimestamp, formatBigNumber } from 'utils/formatting';
 import DurationIcon from 'assets/svg/duration.svg';
 import DifficultyLevelIcon from 'assets/svg/difficulty-level.svg';
 import SpeedIcon from 'assets/svg/speed.svg';
