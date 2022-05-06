@@ -65,8 +65,9 @@ const HomeSection: FC = () => {
         <h1 className='banner-text'>What is Tensor Hero?</h1>
         <p className='banner-text'>
           Tensor Hero is a web-based <em>Machine-Learning empowered</em>
-          &nbsp;charting tool that auto-generates playable charts for Clone Hero
-          &nbsp;(one sentence abt the community and support chart-sharing).
+          &nbsp;charting tool that auto-generates playable charts
+          for Clone Hero. It is also a place to share and explore
+          content created by other users.
         </p>
         <Button style={{ marginTop: '5%' }}
           onClick={() => window.location.assign('generate.html')}>

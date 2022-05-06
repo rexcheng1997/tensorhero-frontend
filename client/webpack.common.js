@@ -16,6 +16,7 @@ module.exports = {
   resolve: {
     alias: {
       assets: path.resolve(__dirname, '../public'),
+      config: path.resolve(__dirname, 'src/config'),
       components: path.resolve(__dirname, 'src/components'),
       utils: path.resolve(__dirname, 'src/utils'),
     },

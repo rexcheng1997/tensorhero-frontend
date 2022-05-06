@@ -1,12 +1,11 @@
 .chart-card {
   $chart-card-background-color: rgba(144, 105, 255, 0.19);
 
-  width: 600px;
+  width: calc(100% - 2 * 2rem);
   position: relative;
   margin: 0 auto 2rem auto;
   background-color: $chart-card-background-color;
   border-radius: 5px;
-  overflow: hidden;
 
   &.fill {
     width: 100%;
@@ -72,7 +71,7 @@
     }
 
     .right {
-      margin-left: 1rem;
+      margin-left: 2rem;
 
       span {
         margin-left: 1rem;
@@ -85,7 +84,7 @@
 
       &.artist {
         color: #ffd494;
-        font-size: 18px;
+        font-size: 20px;
       }
     }
 
@@ -118,14 +117,44 @@
   }
 }
 
+@media (max-width: 425px) {
+  .chart-card {
+    width: 100%;
+  }
+}
 @media (min-width: 1440px) {
   .chart-card {
+    width: max(600px, (100% - 2 * 1rem) / 2 - 1rem);
     margin: 0 1rem 2rem 1rem;
 
     &.fill {
       margin: 0;
       margin-bottom: 2rem;
     }
+
+    .chart-card-inner .right {
+      margin-left: 1rem;
+    }
+  }
+}
+@media (min-width: 1800px) {
+  .chart-card {
+    width: calc((100% - 2 * 2rem) / 2 - 2rem);
+    margin: 0 2rem 2rem 2rem;
+
+    .chart-card-inner .right {
+      margin-left: 2rem;
+    }
+  }
+}
+@media (min-width: 2400px) {
+  .chart-card {
+    width: max(600px, (100% - 2 * 1rem) / 3 - 2rem);
+    margin: 0 1rem 2rem 1rem;
+  }
+
+  .chart-card-inner .right {
+    margin-left: 1rem;
   }
 }
 
@@ -141,9 +170,9 @@
   background-color: #63a1ff;
   border-radius: 2px;
   font-family: 'Timmana', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
-  padding-top: 7px;
+  padding-top: 8px;
 }
 
 .difficulty-level .level {

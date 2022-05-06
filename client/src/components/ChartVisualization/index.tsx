@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Loader } from 'pixi.js';
+import _ from 'lodash';
 import { Howl } from 'howler';
 import { CreateEventHandlerFactory } from 'components/types';
 import AspectRatioContainer from 'components/AspectRatioContainer';
@@ -26,7 +26,7 @@ import FullscreenExitIcon from 'assets/svg/fullscreen.exit.svg';
 const sprites = {};
 const INITIAL_VOLUME = 0.8;
 const MIN_BLOCK_CONTROL_PERCENTAGE = 0.005;
-let loader: Loader;
+const loader = createNoteSpriteLoader(sprites);
 let animationApp: ChartVisualizationApp;
 let overviewApp: ChartVisualizationApp;
 let audio: Howl;
@@ -137,6 +137,13 @@ export default function ChartVisualization({
     rootContainerRef.current!.classList.toggle('full-screen');
     animationApp.resize(animationContainerRef.current!);
     overviewApp.resize(overviewContainerRef.current!);
+    computeBlockControlWidth();
+
+    if (fullscreen) {
+      window.scrollTo({
+        top: rootContainerRef.current?.offsetTop || 0,
+      });
+    }
   };
 
   const updateTimestamp = () => {
@@ -220,7 +227,6 @@ export default function ChartVisualization({
   };
 
   useEffect(() => {
-    loader = createNoteSpriteLoader(sprites);
     audio = new Howl({
       src: [audioUrl],
       autoplay: false,
@@ -230,6 +236,10 @@ export default function ChartVisualization({
     Promise.all([
       // wait for all sprites to be loaded
       new Promise<void>((resolve, reject) => {
+        if (_.get(loader, 'finished', false)) {
+          return resolve();
+        }
+
         loader.onComplete.add(() => resolve());
         loader.onError.add((error) => reject(error));
       }),

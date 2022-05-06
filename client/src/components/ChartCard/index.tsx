@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import { formatTimestamp, formatBigNumber } from 'utils/formatting';
+import { formatTimestamp, formatBigNumber, formatDate } from 'utils/formatting';
+import Tooltip from 'components/Tooltip';
 import DurationIcon from 'assets/svg/duration.svg';
 import DifficultyLevelIcon from 'assets/svg/difficulty-level.svg';
 import SpeedIcon from 'assets/svg/speed.svg';
@@ -11,6 +12,7 @@ import FavoriteIcon from 'assets/svg/favorite.svg';
 import TwitchIcon from 'assets/svg/twitch.svg';
 import ShareIcon from 'assets/svg/share.svg';
 import DownloadIcon from 'assets/svg/download.svg';
+import Snackbar from 'components/Snackbar';
 
 export type ChartDataObject = {
   id: number,
@@ -51,6 +53,7 @@ export default function ChartCard({
   data, showDetails, onClick: clickEventHandler,
 }: ChartCardProps): JSX.Element {
   const favoriteIconParentRef = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState<string>('');
 
   const favoriteClickEventHandler = (event: React.MouseEvent<SVGElement>) => {
     event.stopPropagation();
@@ -68,6 +71,8 @@ export default function ChartCard({
       'notes.chart': data.chart.expert!,
       [`song.${audioExtension}`]: data.audio,
     };
+
+    setMessage('Preparing your download...');
 
     Promise.all<Promise<[string, Blob]>[]>(
         Object.entries(files).map(
@@ -92,12 +97,17 @@ export default function ChartCard({
       zip.generateAsync({ type: 'blob' }).then((content) => {
         const timestamp = new Date().getTime();
         saveAs(content, `${data.artist}-${data.title}-${timestamp}.zip`);
+        setMessage('');
       });
     });
   };
 
   return (
     <div className={'chart-card' + (showDetails ? '' : ' fill')}>
+      {message.length > 0 && <Snackbar position='bottom right'>
+        <p>{message}</p>
+      </Snackbar>}
+
       <div className='chart-card-inner flex-row nowrap'
         style={{ cursor: clickEventHandler ? 'pointer' : 'default' }}
         onClick={() => clickEventHandler && clickEventHandler(data)}>
@@ -116,10 +126,10 @@ export default function ChartCard({
 
           <div className='metadata flex-row align-center'>
             <span className='charter'>
-              by <strong>{data.charter}</strong>
+              chart by <strong>{data.charter}</strong>
             </span>
             <span className='date'>
-              {new Date(data.createdAt).toDateString()}
+              {formatDate(data.createdAt)}
             </span>
           </div>
 
@@ -133,13 +143,13 @@ export default function ChartCard({
               <PlayIcon width='28' height='28' viewBox='0 0 24 24'/>
               <span>{formatBigNumber(data.plays)}</span>
             </div>
-            <div className='downloads flex-row align-center'>
-              <DownloadIcon width='20' height='18' viewBox='0 0 24 22'/>
-              <span>{formatBigNumber(data.downloads)}</span>
-            </div>
             <div className='shares flex-row align-center'>
               <ShareIcon/>
               <span>{formatBigNumber(data.shares)}</span>
+            </div>
+            <div className='downloads flex-row align-center'>
+              <DownloadIcon width='20' height='18' viewBox='0 0 24 22'/>
+              <span>{formatBigNumber(data.downloads)}</span>
             </div>
           </div>
 
@@ -174,11 +184,19 @@ export default function ChartCard({
       </div>
 
       <div className='chart-card-actions flex-col align-center space-between'>
-        <FavoriteIcon onClick={favoriteClickEventHandler}/>
-        <TwitchIcon/>
-        <ShareIcon/>
-        <DownloadIcon width='20' height='18' viewBox='0 0 24 22'
-          onClick={downloadEventHandler}/>
+        <Tooltip description='Like it' position='top'>
+          <FavoriteIcon onClick={favoriteClickEventHandler}/>
+        </Tooltip>
+        <Tooltip description='Share on Twitch' position='top'>
+          <TwitchIcon/>
+        </Tooltip>
+        <Tooltip description='Share via link' position='top'>
+          <ShareIcon/>
+        </Tooltip>
+        <Tooltip description='Dowload chart' position='top'>
+          <DownloadIcon width='20' height='18' viewBox='0 0 24 22'
+            onClick={downloadEventHandler}/>
+        </Tooltip>
       </div>
 
     </div>

@@ -37,3 +37,7 @@ exports.mockGetBoundingClientRect = function(props = {}) {
     };
   };
 };
+
+exports.mockWindowMethods = function() {
+  window.scrollTo = () => {};
+};

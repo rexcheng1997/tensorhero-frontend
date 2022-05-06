@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import ChartVisualization from 'components/ChartVisualization';
-import { ChartObjectInterface } from 'utils/chart-parser';
+import parseChartFile, { ChartObjectInterface } from 'utils/chart-parser';
 import InputField from 'components/Form/InputField';
 import Button from 'components/Button';
 import DownloadIcon from 'assets/svg/download.svg';
@@ -12,16 +12,30 @@ export type ChartInfo = {
   link?: string,
   charter?: string,
 };
+
 type ChartViewProps = {
   chartInfo: ChartInfo,
-  chartObject: ChartObjectInterface,
-  audioUrl: string,
+  chart: string,
+  audio: File,
+  cover: File,
   readOnly: boolean,
 };
 
 const ChartView: FC<ChartViewProps> = ({
-  chartInfo, chartObject, audioUrl, readOnly,
+  chartInfo, chart, audio, cover, readOnly,
 }: ChartViewProps): JSX.Element => {
+  const [chartObject, setChartObject] = useState<ChartObjectInterface>();
+  const [audioUrl, setAudioUrl] = useState<string>('');
+
+  useEffect(() => {
+    setChartObject(parseChartFile(chart));
+    setAudioUrl(URL.createObjectURL(audio));
+
+    return () => {
+      audioUrl.length > 0 && URL.revokeObjectURL(audioUrl);
+    };
+  }, []);
+
   return (
     <main className='container inner-container flex-col'>
       <h2 className='section-title'>
@@ -48,7 +62,10 @@ const ChartView: FC<ChartViewProps> = ({
             <Button className='th-tab' disabled><span>Hard</span></Button>
             <Button className='th-tab active'><span>Expert</span></Button>
           </div>
-          <ChartVisualization chartObject={chartObject} audioUrl={audioUrl}/>
+          {
+            chartObject && audioUrl.length > 0 &&
+            <ChartVisualization chartObject={chartObject} audioUrl={audioUrl}/>
+          }
         </div>
       </div>
       {!readOnly && <div className='actions flex-row align-center justify-end'>

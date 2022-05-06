@@ -29,6 +29,9 @@ export default function createNoteSpriteLoader(
     }
   });
 
+  loader.onComplete.add(() => Object.defineProperty(loader, 'finished', {
+    get: () => true,
+  }));
   loader.onError.add((error) => console.error(error));
 
   return loader;

@@ -11,6 +11,7 @@ import userEvent from '@testing-library/user-event';
 import {
   mockGetBoundingClientRect,
   mockHTMLElementProperties,
+  mockWindowMethods,
 } from '__mocks__/domiscMock';
 
 jest.mock('howler');
@@ -33,11 +34,13 @@ jest.mock('utils/chart-visualization/noteSpriteLoader', () => jest.fn().mockRetu
   onError: {
     add: () => {},
   },
+  destroy: () => {},
 }));
 
 beforeAll(() => {
   mockHTMLElementProperties({ clientWidth: 860, clientHeight: 320 });
   mockGetBoundingClientRect();
+  mockWindowMethods();
 });
 
 afterEach(() => {
@@ -118,18 +121,23 @@ describe('<ChartVisualization />', () => {
   });
 
   test('should enter/exit full screen mode when clicking on the full screen icon', async () => {
+    const windowScrollToSpy = jest.spyOn(window, 'scrollTo');
+
     const { findByTestId } = renderChartVisualization();
     const container = await findByTestId('chart-viz-wrapper');
     const fullscreenIcon = await findByTestId('full-screen-icon');
     await waitForOnMountedHooks();
 
     expect(container).not.toHaveClass('full-screen');
+    expect(windowScrollToSpy).not.toHaveBeenCalled();
 
     fireEvent.click(fullscreenIcon);
     expect(container).toHaveClass('full-screen');
+    expect(windowScrollToSpy).not.toHaveBeenCalled();
 
     fireEvent.click(fullscreenIcon);
     expect(container).not.toHaveClass('full-screen');
+    expect(windowScrollToSpy).toHaveBeenCalledTimes(1);
   });
 
   test('should play/pause the animation and the audio on clicking the main screen', async () => {

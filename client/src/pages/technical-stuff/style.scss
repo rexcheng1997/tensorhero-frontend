@@ -123,10 +123,40 @@ section {
       font-family: 'Timmana', sans-serif;
       font-size: 24px;
       line-height: 1;
-      padding-top: 7px;
+      padding-top: 8px;
       color: var(--th-orange);
       margin-right: 2rem;
       text-transform: none;
+    }
+
+    .link-container {
+      position: relative;
+      padding-left: 1rem;
+
+      &::before {
+        $padding-top: 5px;
+        content: '';
+        display: block;
+        width: 1.6px;
+        height: calc(100% - #{$padding-top});
+        position: absolute;
+        top: $padding-top;
+        left: 0;
+        background-color: var(--th-white);
+        border-radius: 1px;
+      }
+    }
+    
+    .link {
+      margin-bottom: 1.6rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        margin-left: 0.6rem;
+      }
     }
   }
 }

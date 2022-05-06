@@ -6,23 +6,22 @@ import _ from 'lodash';
 import Navbar from 'components/Navbar';
 import Upload, { SongInfo } from './Upload';
 import ChartView, { ChartInfo } from './ChartView';
-import { ChartObjectInterface } from 'utils/chart-parser';
 import ProgressReport from './ProgressReport';
 
 const GenerateCHLevelPage: FC = () => {
   const [chartInfo, setChartInfo] = useState<ChartInfo>();
-  const [chartObject] = useState<ChartObjectInterface>();
-  const [audioUrl, setAudioUrl] = useState<string>('');
+  const [chartFile, setChartFile] = useState<string>('');
+  const [audioFile, setAudioFile] = useState<File>();
+  const [coverFile, setCoverFile] = useState<File>();
 
   const uploadEventHandler = (formData: FormData) => {
+    setAudioFile(formData.get('audio') as SongInfo['audio']);
+    setCoverFile(formData.get('cover') as SongInfo['cover']);
     setChartInfo({
       title: formData.get('title') as SongInfo['title'],
       artist: formData.get('artist') as SongInfo['artist'],
       createdAt: new Date().toJSON(),
     });
-    setAudioUrl(
-        URL.createObjectURL(formData.get('audio') as SongInfo['audio']),
-    );
   };
 
   useEffect(() => {
@@ -37,30 +36,26 @@ const GenerateCHLevelPage: FC = () => {
     //   setChartObject(parseChartFile(chartFile));
     //   setAudioUrl('examples/Andy McKee - Ouray/song.ogg');
     // });
-
-    return () => {
-      if (audioUrl.length > 0) {
-        URL.revokeObjectURL(audioUrl);
-      }
-    };
   }, []);
+
+  const awaitingUserUpload = _.isNil(audioFile) || _.isNil(coverFile);
+  const awaitingMLOutput = !awaitingUserUpload && chartFile.length === 0;
+  const chartReady = (
+    !awaitingUserUpload && chartFile.length > 0 && !_.isNil(chartInfo)
+  );
 
   return (<>
     <Navbar base='.'/>
     <div className='container page-height center pattern-background'>
-      {audioUrl.length === 0 && <Upload onSubmit={uploadEventHandler}/>}
-      {
-        _.isNil(chartObject) && audioUrl.length > 0 &&
-        <ProgressReport/>
-      }
-      {
-        !_.isNil(chartObject) && !_.isNil(chartInfo) && audioUrl.length > 0 &&
-        <ChartView
-          chartInfo={chartInfo}
-          chartObject={chartObject}
-          audioUrl={audioUrl}
-          readOnly={false}/>
-      }
+
+      {awaitingUserUpload && <Upload onSubmit={uploadEventHandler}/>}
+
+      {awaitingMLOutput && <ProgressReport/>}
+
+      {chartReady && <ChartView chartInfo={chartInfo}
+        chart={chartFile} audio={audioFile} cover={coverFile}
+        readOnly={false}/>}
+
     </div>
   </>);
 };

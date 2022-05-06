@@ -55,6 +55,8 @@
 
 .section-title {
   margin-bottom: 1rem;
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .upload-music-form {
@@ -154,6 +156,110 @@ button.upload-music-form-submit {
   .input-field input {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
+  }
+}
+
+.progress-illustration {
+  max-width: 100%;
+}
+
+.progress {
+  $progress-bar-height: 20px;
+  $progress-checkpoint-radius: 25px;
+  width: 100%;
+
+  .progress-percentage {
+    font-family: 'Timmana', sans-serif;
+    font-size: 24px;
+  }
+
+  .progress-bar-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: $progress-bar-height;
+    position: relative;
+    background-color: var(--th-gray);
+    border-radius: 10px;
+
+    .progress-bar-inner {
+      height: 100%;
+      background-color: var(--th-white);
+      border-radius: 10px;
+      transition: width 0.6s ease-out;
+    }
+
+    .progress-checkpoint {
+      width: $progress-bar-height;
+      height: $progress-bar-height;
+      position: absolute;
+      top: 50%;
+      background-color: var(--th-light-gray);
+      border-radius: 100%;
+      transition: all 0.6s ease 0.6s;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+
+      &:nth-child(2) {
+        transform: translate(0, -50%);
+      }
+      &:last-child {
+        transform: translate(-100%, -50%);
+      }
+
+      &.active {
+        width: $progress-checkpoint-radius;
+        height: $progress-checkpoint-radius;
+        background-color: var(--th-orange);
+      }
+    }
+  }
+
+  .step-summary {
+    position: absolute;
+    top: calc(100% + 15px);
+    transform: translateX(-50%);
+
+    &:nth-child(2) {
+      transform: translateX(-40%);
+    }
+    &:last-child {
+      transform: translateX(-60%);
+    }
+
+    .step-title {
+      font-family: 'Timmana', sans-serif;
+      line-height: 1;
+      text-transform: capitalize;
+    }
+
+    svg > * {
+      transition: all 0.6s ease;
+    }
+
+    svg.completed > * {
+      fill: var(--th-green);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .progress {
+    .progress-percentage {
+      font-size: 18px;
+    }
+
+    .step-summary .step-title {
+      font-size: 14px;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .progress {
+    width: min(100%, 680px);
   }
 }
 

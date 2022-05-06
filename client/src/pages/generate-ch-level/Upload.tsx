@@ -3,6 +3,7 @@ import _ from 'lodash';
 import InputField from 'components/Form/InputField';
 import Button from 'components/Button';
 import UploadIcon from 'assets/svg/upload.svg';
+import Snackbar from 'components/Snackbar';
 
 export type SongInfo = {
   title: string,
@@ -11,11 +12,15 @@ export type SongInfo = {
   album?: string,
   year?: string,
   audio: File,
+  cover: File,
 };
 
 type UploadProps = {
   onSubmit: (formData: FormData) => void,
 }
+
+// eslint-disable-next-line max-len
+const MISSING_AUDIO_FILE_WARNING = 'Please choose the audio file for the song you want to use to generate CH level.';
 
 const Upload: FC<UploadProps> = ({
   onSubmit: uploadEventHandler,
@@ -29,6 +34,7 @@ const Upload: FC<UploadProps> = ({
   );
   const [coverFile, setCoverFile] = useState<File>();
   const [coverImageUrl, setCoverImageUrl] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
   const createInputEventHandler = (
       setState: React.Dispatch<React.SetStateAction<File | undefined>>,
@@ -43,6 +49,12 @@ const Upload: FC<UploadProps> = ({
 
   const formSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (_.isNil(audioFile)) {
+      setMessage(MISSING_AUDIO_FILE_WARNING);
+      return;
+    }
+
     const formData = new FormData(event.currentTarget);
     uploadEventHandler(formData);
   };
@@ -60,14 +72,19 @@ const Upload: FC<UploadProps> = ({
     setCoverImageUrl(URL.createObjectURL(coverFile));
 
     return () => {
-      if (coverImageUrl.length > 0) {
-        URL.revokeObjectURL(coverImageUrl);
-      }
+      coverImageUrl.length > 0 && URL.revokeObjectURL(coverImageUrl);
     };
   }, [coverFile]);
 
   return (
     <div className='container inner-container center flex-col'>
+      {
+        message.length > 0 &&
+        <Snackbar position='top center'
+          onClose={() => setMessage('')} timeout={5e3}>
+          <small>{message}</small>
+        </Snackbar>
+      }
       <h2 className='section-title'>Upload Music</h2>
       <form id='upload-music-form' className='upload-music-form flex-col'
         onSubmit={formSubmitHandler}>
@@ -87,7 +104,7 @@ const Upload: FC<UploadProps> = ({
             <span>choose audio file</span>
           </label>
           <input type='file' name='audio' id='audio' accept='.mp3,.wav,.ogg'
-            onInput={createInputEventHandler(setAudioFile)} required/>
+            onInput={createInputEventHandler(setAudioFile)}/>
           <small>{audioUploadHint}</small>
         </div>
         <div className='flex-row align-center'

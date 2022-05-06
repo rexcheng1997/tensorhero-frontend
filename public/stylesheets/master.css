@@ -167,7 +167,7 @@ form .input-field input {
     max-width: 1320px;
   }
 }
-@media (min-width: 1600px) {
+@media (min-width: 1680px) {
   .container {
     max-width: 80vw;
   }

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import _ from 'lodash';
 import * as PIXI from 'pixi.js';
 import { NoteDescription } from 'utils/chart-parser';
 import createNoteSpriteLoader from '../noteSpriteLoader';
@@ -14,8 +15,11 @@ describe('noteSpriteLoader test suite', () => {
     const sprites: { [key: string]: PIXI.Sprite } = {};
     const loader = createNoteSpriteLoader(sprites);
 
+    expect(_.get(loader, 'finished', false)).toBe(false);
+
     loader.onComplete.add(() => {
       expect(consoleErrorSpy).not.toHaveBeenCalled();
+
       expect(sprites[NoteDescription[NoteDescription.GREEN]]).toEqual(PIXI.Sprite.from('images/note.green.png'));
       expect(sprites[NoteDescription[NoteDescription.RED]]).toEqual(PIXI.Sprite.from('images/note.red.png'));
       expect(sprites[NoteDescription[NoteDescription.YELLOW]]).toEqual(PIXI.Sprite.from('images/note.yellow.png'));
@@ -25,6 +29,8 @@ describe('noteSpriteLoader test suite', () => {
       expect(sprites[NoteDescription[NoteDescription.TAP_NOTE]]).toBeUndefined();
       expect(sprites[NoteDescription[NoteDescription.OPEN_NOTE]]).toBeUndefined();
       expect(sprites['something not existing']).toBeUndefined();
+
+      expect(_.get(loader, 'finished', false)).toBe(true);
     });
   });
 });
