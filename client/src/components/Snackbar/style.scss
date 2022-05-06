@@ -1,0 +1,30 @@
+.snackbar {
+  max-width: 80vw;
+  position: fixed;
+  padding: 0.6rem 2rem;
+  background-color: var(--th-light-purple);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 3000;
+
+  &.top {
+    top: var(--navbar-height);
+  }
+  &.center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &.bottom {
+    bottom: 1rem;
+  }
+  &.right {
+    right: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .snackbar {
+    max-width: 50vw;
+    padding: 1rem 3rem;
+  }
+}
