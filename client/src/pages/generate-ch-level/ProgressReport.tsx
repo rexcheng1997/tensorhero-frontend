@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { ML_SERVER } from 'config';
 import CheckMarkIcon from 'assets/svg/check-mark.svg';
+import Snackbar from 'components/Snackbar';
 
 export enum ModelStep {
   UPLOADING,
-  SEPARATING, SPECTROGRAMS, FLATTEN_ARRAY,
-  FEED, FLATTEN_OUTPUT, CONVERT_TO_CHART,
-  COMPLETE,
+  SEPARATION, SPECTROGRAM, FLATTEN_ARRAY,
+  FEED, TRANSFORM, CONVERT_TO_CHART,
+  COMPLETED,
 }
 
 type StepInfo = {
@@ -20,47 +22,67 @@ const STEPS: Record<ModelStep, StepInfo> = {
     title: 'Upload',
     image: 'images/upload.gif',
   },
-  [ModelStep.SEPARATING]: {
+  [ModelStep.SEPARATION]: {
     header: 'Separating source to extract guitar audio',
     title: 'Separation',
-    image: 'images/upload.gif',
+    image: 'images/separation.gif',
   },
-  [ModelStep.SPECTROGRAMS]: {
+  [ModelStep.SPECTROGRAM]: {
     header: 'Analyzing frequency spectrogram',
     title: 'Spectrograms',
-    image: 'images/upload.gif',
+    image: 'images/spectrogram.gif',
   },
   [ModelStep.FLATTEN_ARRAY]: {
     header: 'Flattening spectrogram',
     title: 'Flatten',
-    image: 'images/upload.gif',
+    image: 'images/flatten.gif',
   },
   [ModelStep.FEED]: {
     header: 'Feeding into the model',
     title: 'Feed',
-    image: 'images/upload.gif',
+    image: 'images/feed.gif',
   },
-  [ModelStep.FLATTEN_OUTPUT]: {
-    header: 'Flattening model output',
-    title: 'Flatten',
-    image: 'images/upload.gif',
+  [ModelStep.TRANSFORM]: {
+    header: 'Transforming model output',
+    title: 'Transform',
+    image: 'images/transform.gif',
   },
   [ModelStep.CONVERT_TO_CHART]: {
     header: 'Converting to chart file',
     title: 'Chartify',
-    image: 'images/upload.gif',
+    image: 'images/chartify.gif',
   },
-  [ModelStep.COMPLETE]: {
+  [ModelStep.COMPLETED]: {
     header: 'Rendering your chart',
     title: 'Complete',
     image: 'images/upload.gif',
   },
 };
 
-const ProgressReport: FC = () => {
-  const longPoolingEvent = useRef<number>();
+// eslint-disable-next-line max-len
+const SERVICE_NOT_AVAILABLE_WARNING = 'Backend service not available. Showing a demo of the workflow.';
+
+type CreateJobResponseSchema = {
+  jobId: string,
+};
+type GetJobStatusResponseSchema = {
+  status: keyof typeof ModelStep,
+  chart?: string,
+};
+
+type ProgressReportProps = {
+  data: FormData,
+  onChartReady: (chart: string) => void,
+};
+
+const ProgressReport: FC<ProgressReportProps> = ({
+  data: formData, onChartReady: setChart,
+}) => {
+  const stepIndex = useRef<number>(0);
+  const longPollingEvent = useRef<number>();
   const [stepEnum, setStepEnum] = useState<ModelStep>(ModelStep.UPLOADING);
   const [stepInfo, setStepInfo] = useState<StepInfo>(STEPS[stepEnum]);
+  const [message, setMessage] = useState<string>('');
   const totalSteps = Object.keys(STEPS).length;
 
   const calculatePercentage = (
@@ -68,21 +90,50 @@ const ProgressReport: FC = () => {
   ): number => Math.min(100, Math.ceil(i / (totalSteps - 1) * 100));
 
   useEffect(() => {
-    const longPooling = () => {
-      const steps: (keyof typeof ModelStep)[] = [
-        'UPLOADING',
-        'SEPARATING', 'SPECTROGRAMS', 'FLATTEN_ARRAY',
-        'FEED', 'FLATTEN_OUTPUT', 'CONVERT_TO_CHART',
-        'COMPLETE',
-      ];
-      const random = Math.floor(Math.random() * totalSteps);
-      setStepEnum(ModelStep[steps[random]]);
-    };
+    fetch(ML_SERVER.createJob, {
+      method: 'PUT',
+      body: formData,
+    }).then(
+        (response) => response.json(),
+    ).then(({ jobId }: CreateJobResponseSchema) => {
+      longPollingEvent.current = window.setInterval(() => {
+        fetch(ML_SERVER.getJobStatus + '?' + new URLSearchParams({
+          jobId,
+        })).then(
+            (response) => response.json(),
+        ).then(({ status, chart }: GetJobStatusResponseSchema) => {
+          setStepEnum(ModelStep[status]);
 
-    longPoolingEvent.current = window.setInterval(longPooling, 2e3);
+          if (ModelStep[status] === ModelStep.COMPLETED && chart) {
+            setChart(chart);
+            clearInterval(longPollingEvent.current);
+          }
+        });
+      }, 2e3);
+    }).catch(() => {
+      setMessage(SERVICE_NOT_AVAILABLE_WARNING);
+
+      longPollingEvent.current = window.setInterval(() => {
+        stepIndex.current++;
+
+        if (stepIndex.current >= totalSteps) {
+          clearInterval(longPollingEvent.current);
+          stepIndex.current = 0;
+          setMessage('');
+
+          fetch('examples/Andy McKee - Ouray/notes.chart').then(
+              (response) => response.text(),
+          ).then(
+              (chart) => setChart(chart),
+          );
+        } else {
+          setStepEnum(stepIndex.current);
+        }
+      }, 8e3);
+    });
 
     return () => {
-      clearInterval(longPoolingEvent.current);
+      clearInterval(longPollingEvent.current);
     };
   }, []);
 
@@ -92,10 +143,17 @@ const ProgressReport: FC = () => {
 
   return (
     <div className='container inner-container center'>
+      {
+        message.length > 0 && <Snackbar position='top center'>
+          <small>{message}</small>
+        </Snackbar>
+      }
       <div className='flex-col align-center' style={{
         width: '100%', marginBottom: '3rem',
       }}>
-        <h2 className='section-title'>{stepInfo.header}</h2>
+        <h2 className='section-title center'>
+          {stepInfo.header}
+        </h2>
 
         <img className='progress-illustration'
           src={stepInfo.image} alt={stepInfo.title}/>

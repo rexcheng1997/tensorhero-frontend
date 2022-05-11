@@ -2,6 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import ChartCard, { ChartDataObject } from 'components/ChartCard';
 import TrieNode from 'utils/TrieNode';
 import SearchIcon from 'assets/svg/search.svg';
+import { MASTER_SERVER } from 'config';
 
 type ChartListingProps = {
   onSelect: (chart: ChartDataObject) => void,
@@ -48,9 +49,7 @@ const ChartListing: FC<ChartListingProps> = ({
   };
 
   useEffect(() => {
-    fetch('dump/charts.json').then(
-        (response) => response.json(),
-    ).then((data: GetChartsResponseSchema) => {
+    const responseHandler = (data: GetChartsResponseSchema) => {
       chartFullList.current = data.charts;
       setDisplayList(data.charts);
       data.charts.forEach((chart) => {
@@ -59,6 +58,16 @@ const ChartListing: FC<ChartListingProps> = ({
         ].join(' ');
         prefixTree.current.addPhrase(key, chart);
       });
+    };
+
+    fetch(MASTER_SERVER.getChartListing).then(
+        (response) => response.json(),
+    ).then(
+        responseHandler,
+    ).catch(() => {
+      fetch('dump/charts.json').then(
+          (response) => response.json(),
+      ).then(responseHandler);
     });
   }, []);
 

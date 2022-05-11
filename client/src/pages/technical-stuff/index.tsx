@@ -33,6 +33,8 @@ const TechnicalStuffPage: FC = () => {
             run through a source separation function, which allows
             us to extract only the guitar audio from the full song.
           </p>
+          <img className='graphics'
+            src='images/separation.gif' alt='separation illustration'/>
         </StepContent>
         <StepContent no={2} title='spectrograms'>
           <p>
@@ -43,6 +45,8 @@ const TechnicalStuffPage: FC = () => {
             a graph where the x-axis represents the timestep of the song,
             and the y-axis represents the observed frequency values.
           </p>
+          <img className='graphics'
+            src='images/spectrogram.gif' alt='spectrogram illustration'/>
         </StepContent>
         <StepContent no={3} title='flatten'>
           <p>
@@ -51,6 +55,8 @@ const TechnicalStuffPage: FC = () => {
             saying a list of values. These values represent,
             in order, the notes heard from the guitar.
           </p>
+          <img className='graphics'
+            src='images/flatten.gif' alt='flatten illustration'/>
         </StepContent>
         <StepContent no={4} title='feed'>
           <p>
@@ -59,21 +65,27 @@ const TechnicalStuffPage: FC = () => {
             into pieces that are each about 4 seconds long,
             and feed them in order into the model.
           </p>
+          <img className='graphics'
+            src='images/feed.gif' alt='feed illustration'/>
         </StepContent>
-        <StepContent no={5} title='flatten'>
+        <StepContent no={5} title='transform'>
           <p>
             As each piece is ingested, the model predicts corresponding
-            CloneHero notes as output, which are then concatenated
+            Clone Hero notes as output, which are then concatenated
             all together to make it a single long list of notes for
             the whole song.
           </p>
+          <img className='graphics'
+            src='images/transform.gif' alt='transform illustration'/>
         </StepContent>
         <StepContent no={6} title='chart-ify'>
           <p>
             This output format, which is another long list of values,
             is then transformed into a chart format that is readable by
-            the CloneHero game.
+            the Clone Hero game.
           </p>
+          <img className='graphics'
+            src='images/chartify.gif' alt='chartify illustration'/>
         </StepContent>
       </div>
     </section>

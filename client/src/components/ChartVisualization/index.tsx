@@ -34,6 +34,7 @@ let audio: Howl;
 export type ChartVisualizationProps = {
   chartObject: ChartObjectInterface,
   audioUrl: string,
+  audioExtension?: string,
   callbackOnLoaded?: () => void,
 };
 
@@ -44,7 +45,7 @@ export type ChartVisualizationProps = {
  * @return {JSX.Element}
  */
 export default function ChartVisualization({
-  chartObject, audioUrl, callbackOnLoaded,
+  chartObject, audioUrl, audioExtension, callbackOnLoaded,
 }: ChartVisualizationProps): JSX.Element {
   const loaded = useRef<boolean>(false);
   const rootContainerRef = useRef<HTMLDivElement>(null);
@@ -229,6 +230,7 @@ export default function ChartVisualization({
   useEffect(() => {
     audio = new Howl({
       src: [audioUrl],
+      format: audioExtension,
       autoplay: false,
       volume: INITIAL_VOLUME,
     });

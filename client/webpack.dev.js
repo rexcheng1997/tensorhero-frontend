@@ -16,6 +16,13 @@ module.exports = merge(common, {
     ],
     compress: true,
     port: 3000,
+    proxy: {
+      '/ml-server': {
+        target: 'http://localhost:4000',
+        pathRewrite: { '^/ml-server': '' },
+      },
+      '/api': 'http://localhost:8080',
+    },
   },
   watchOptions: {
     aggregateTimeout: 1000,

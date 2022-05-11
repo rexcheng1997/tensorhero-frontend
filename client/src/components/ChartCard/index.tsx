@@ -20,6 +20,8 @@ export type ChartDataObject = {
   artist: string,
   charter: string,
   genre: string,
+  album: string,
+  year: string,
   cover: string,
   audio: string,
   chart: {
@@ -154,7 +156,7 @@ export default function ChartCard({
           </div>
 
           {showDetails && <div className='tags flex-col align-end'>
-            {data.genre && <span className='tag'>{data.genre}</span>}
+            {data.genre.length > 0 && <span className='tag'>{data.genre}</span>}
           </div>}
 
         </div>

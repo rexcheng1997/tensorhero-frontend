@@ -55,8 +55,11 @@
 
 .section-title {
   margin-bottom: 1rem;
-  text-align: center;
   text-transform: capitalize;
+
+  &.center {
+    text-align: center;
+  }
 }
 
 .upload-music-form {
@@ -160,7 +163,8 @@ button.upload-music-form-submit {
 }
 
 .progress-illustration {
-  max-width: 100%;
+  width: 70%;
+  max-width: 580px;
 }
 
 .progress {
@@ -246,6 +250,11 @@ button.upload-music-form-submit {
   }
 }
 
+@media (max-width: 425px) {
+  .progress-illustration {
+    width: 100%;
+  }
+}
 @media (max-width: 768px) {
   .progress {
     .progress-percentage {

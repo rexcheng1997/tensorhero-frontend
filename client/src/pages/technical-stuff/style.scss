@@ -168,10 +168,12 @@ section {
         display: grid;
         grid-template-columns: 220px auto;
       }
-
-      .graphics {
-        width: 50%;
-      }
     }
+  }
+}
+@media (min-width: 1024px) {
+  section .step-by-step-content-wrapper .graphics {
+    width: 80%;
+    max-width: 560px;
   }
 }
