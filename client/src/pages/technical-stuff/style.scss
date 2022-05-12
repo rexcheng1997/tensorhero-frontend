@@ -49,6 +49,7 @@ section {
   }
   
   p {
+    width: 100%;
     margin-bottom: 2rem;
   }
 
@@ -75,6 +76,7 @@ section {
     .step {
       display: flex;
       flex-direction: column;
+      width: 100%;
       margin-bottom: 3rem;
 
       &:last-child {
@@ -107,6 +109,16 @@ section {
     .graphics {
       width: 100%;
     }
+  }
+
+  .illustration {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 1rem;
+  }
+
+  .image-caption {
+    text-align: center;
   }
 
   .external-link {
